@@ -1,0 +1,11 @@
+---
+title: "p8105_hw1_azz2107"
+author: "Adina Zhang"
+date: "September 13, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
