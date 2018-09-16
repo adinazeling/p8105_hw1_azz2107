@@ -7,5 +7,24 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
 ```
 
+# Problem 1
+
+```{r var_df}
+# Create a new dataframe comprised of multiple variable types 
+var_df <- tibble(
+  vec_norm = runif(10, min = 0, max = 5),
+  vec_logical = ifelse(vec_norm > 2, TRUE, FALSE),
+  vec_char = c("apple", "orange", "lemon", "jackfruit", "papaya", "mango", "raspberry", "tomato", "cucumber", "lime"),
+  vec_factor = factor(c("summer", "winter", "summer", "spring", "summer", "winter", "fall", "fall", "winter", "fall"))
+)
+
+var_df
+
+# Calculate the mean of each variable in dataframe var_df
+sapply(var_df,mean)
+```
+
+Only `vec_norm` and `vec_logical` were successful in producing a mean. The normal vector is numeric type which is read by the mean function. The logical vector containing "TRUE" and "FALSE" are translated to numeric types "1" and "0" which are also read by the mean function. Character and factor types are not read by the mean function which is why NA was the output for `vec_char` and `vec_factor`.
