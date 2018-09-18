@@ -47,3 +47,18 @@ as.numeric(as.factor(var_df$vec_char))
 as.numeric(as.character(var_df$vec_factor))
 ```
 When a character type is converted first into a factor and then numeric type, it successfully outputs numbers instead of "NA". If we convert a factor to character and then to numeric type, we once again output "NA". In conclusion, a character type variable will not directly be converted into a numeric type. It must first be converted to factor before numeric.
+
+# Problem 2
+
+```{r create_df}
+# Create a new dataframe containing multiple variable types 
+plot_df <- tibble(
+  x = rnorm(1000),
+  y = rnorm(1000),
+  vec_logical = ifelse(x + y > 0, TRUE, FALSE),
+  vec_numeric = as.numeric(vec_logical),
+  vec_factor = as.factor(vec_numeric)
+)
+```
+
+The dataframe `plot_df` has `r nrow(plot_df)` observations and `r ncol(plot_df)` variables.  The mean of variable x is `r mean(plot_df$x)` and the median of varialbe x is `r median(plot_df$x)`. The proportion of `TRUE` there are in `vec_logical` is `r sum(plot_df$vec_logical, na.rm=TRUE)/1000`.

@@ -143,20 +143,20 @@ var_df</code></pre>
 <pre><code>## # A tibble: 10 x 4
 ##    vec_norm vec_logical vec_char  vec_factor
 ##       &lt;dbl&gt; &lt;lgl&gt;       &lt;chr&gt;     &lt;fct&gt;     
-##  1   3.90   TRUE        apple     summer    
-##  2   3.25   TRUE        orange    winter    
-##  3   0.371  FALSE       lemon     summer    
-##  4   3.99   TRUE        jackfruit spring    
-##  5   0.370  FALSE       papaya    summer    
-##  6   1.42   FALSE       mango     winter    
-##  7   1.85   FALSE       raspberry fall      
-##  8   2.58   TRUE        tomato    fall      
-##  9   0.0425 FALSE       cucumber  winter    
-## 10   0.785  FALSE       lime      fall</code></pre>
+##  1    2.27  TRUE        apple     summer    
+##  2    0.703 FALSE       orange    winter    
+##  3    2.06  TRUE        lemon     summer    
+##  4    4.91  TRUE        jackfruit spring    
+##  5    4.31  TRUE        papaya    summer    
+##  6    1.90  FALSE       mango     winter    
+##  7    0.913 FALSE       raspberry fall      
+##  8    4.39  TRUE        tomato    fall      
+##  9    2.11  TRUE        cucumber  winter    
+## 10    3.09  TRUE        lime      fall</code></pre>
 <pre class="r"><code># Calculate the mean of each variable in dataframe var_df
 sapply(var_df,mean)</code></pre>
 <pre><code>##    vec_norm vec_logical    vec_char  vec_factor 
-##    1.855139    0.400000          NA          NA</code></pre>
+##    2.665971    0.700000          NA          NA</code></pre>
 <p>Only <code>vec_norm</code> and <code>vec_logical</code> were successful in producing a mean. The normal vector is numeric type which is read by the mean function. The logical vector containing “TRUE” and “FALSE” are translated to numeric types “1” and “0” which are also read by the mean function. Character and factor types are not read by the mean function which is why NA was the output for <code>vec_char</code> and <code>vec_factor</code>.</p>
 <div id="converting-variable-types" class="section level2">
 <h2>Converting variable types</h2>
@@ -169,6 +169,18 @@ as.numeric(as.factor(var_df$vec_char))</code></pre>
 as.numeric(as.character(var_df$vec_factor))</code></pre>
 <p>When a character type is converted first into a factor and then numeric type, it successfully outputs numbers instead of “NA”. If we convert a factor to character and then to numeric type, we once again output “NA”. In conclusion, a character type variable will not directly be converted into a numeric type. It must first be converted to factor before numeric.</p>
 </div>
+</div>
+<div id="problem-2" class="section level1">
+<h1>Problem 2</h1>
+<pre class="r"><code># Create a new dataframe containing multiple variable types 
+plot_df &lt;- tibble(
+  x = rnorm(1000),
+  y = rnorm(1000),
+  vec_logical = ifelse(x + y &gt; 0, TRUE, FALSE),
+  vec_numeric = as.numeric(vec_logical),
+  vec_factor = as.factor(vec_numeric)
+)</code></pre>
+<p>The dataframe <code>plot_df</code> has 1000 observations and 5 variables. The mean of variable x is -0.0503115 and the median of varialbe x is -0.0738183. The proportion of <code>TRUE</code> there are in <code>vec_logical</code> is 0.483.</p>
 </div>
 
 
