@@ -1,18 +1,18 @@
 ---
-title: "p8105_hw1_azz2107"
+title: "p8105 Fall 2018 Homework 1"
 author: "Adina Zhang"
 date: "September 13, 2018"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 ```
 
 # Problem 1
 
-```{r var_df}
+```{r var_df, warning = FALSE}
 # Create a new dataframe comprised of multiple variable types 
 var_df <- tibble(
   vec_norm = runif(10, min = 0, max = 5),
@@ -28,3 +28,22 @@ sapply(var_df,mean)
 ```
 
 Only `vec_norm` and `vec_logical` were successful in producing a mean. The normal vector is numeric type which is read by the mean function. The logical vector containing "TRUE" and "FALSE" are translated to numeric types "1" and "0" which are also read by the mean function. Character and factor types are not read by the mean function which is why NA was the output for `vec_char` and `vec_factor`.
+
+## Converting variable types
+
+```{r numeric_type, eval = FALSE}
+# Convert var_df variables to numeric type
+sapply(var_df,as.numeric)
+```
+When `vec_logical` is converted to numeric, the output is "0" or "1". Similarly, when `vec_factor` is converted to numeric, the different levels/categories of the variable are converted to numbers. Since I have four factors (spring, summer, fall, and winter) my `vec_factor` converted to 1-4. `vec_char` did not successfully convert to numeric type, the output is "NA".
+
+```{r convert_char, eval = FALSE}
+# Convert a character vector to factor type and then to numeric type
+as.numeric(as.factor(var_df$vec_char))
+```
+
+```{r convert_factor, eval = FALSE}
+# Convert a factor vector to character type and then to numeric type
+as.numeric(as.character(var_df$vec_factor))
+```
+When a character type is converted first into a factor and then numeric type, it successfully outputs numbers instead of "NA". If we convert a factor to character and then to numeric type, we once again output "NA". In conclusion, a character type variable will not directly be converted into a numeric type. It must first be converted to factor before numeric.
