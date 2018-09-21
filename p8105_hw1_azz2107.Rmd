@@ -63,9 +63,11 @@ plot_df <- tibble(
   vec_numeric = as.numeric(vec_logical),
   vec_factor = as.factor(vec_logical)
 )
+
+plot_df
 ```
 
-The dataframe `plot_df` has `r nrow(plot_df)` observations and `r ncol(plot_df)` variables.  The mean of variable x is `r mean(plot_df$x)` and the median of varialbe x is `r median(plot_df$x)`. The proportion of `TRUE` there are in `vec_logical` is `r sum(plot_df$vec_logical, na.rm=TRUE)/1000`.
+The dataframe `plot_df` has `r nrow(plot_df)` observations and `r ncol(plot_df)` variables: x, y, vec_logical, vec_numeric, and vec_factor.  The mean of variable x is `r mean(plot_df$x)` and the median of varialbe x is `r median(plot_df$x)`. The proportion of `TRUE` there are in `vec_logical` is `r sum(plot_df$vec_logical, na.rm=TRUE)/1000`.
 
 ## Scatterplots
 ```{r scatterplot, message = FALSE}
